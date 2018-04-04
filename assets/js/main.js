@@ -285,10 +285,18 @@ $(function() {
 
         $('.canton').on('click', function() {
             var canton = $(this);
+            disableActiveCanton();
             var elementCanton = $(this).data().canton.toLowerCase();
             dimCircles(elementCanton);
 
             canton.addClass('active');
+        });
+
+        $('#resetCanton').on('click', function() {
+            disableActiveCanton();
+            circles.style('opacity', function(d) {
+                return 1;
+            });
         });
 
         // Fill the simulation with the json data
