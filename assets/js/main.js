@@ -112,6 +112,8 @@ $(function() {
         .append('g')
         .attr('transform', 'translate(0, 0)')
 
+    var jqSvgElement = $(svg['_groups'][0]).parent();
+
     // 13 = lowest / 209 = biggest
     // The range specifies how small and big circles will get
     // In this case, the smallest will have a r of 10, while the biggest will be 80
@@ -184,7 +186,11 @@ $(function() {
             return;
         }
 
-        // Create and append the cirles to the canevas
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // Create and append the circles to the canevas
         var circles = svg.selectAll('circle')
             .data(data)
             .enter().append('circle')
@@ -196,15 +202,26 @@ $(function() {
                 return colors[d.canton];
             })
             .on('click', function(d) {
-                // console.log(d);
-                var canton = d.canton;
-                var smsCount = d.smsCount;
+                console.log(d);
+                // var canton = d.canton;
+                // var smsCount = d.smsCount;
                 // var date = d.
-                console.log(canton);
-                console.log(smsCount);
-                console.log(date);
+                // console.log(canton);
+                // console.log(smsCount);
+                // console.log(date);
                 // console.log('yPos', hoursXCoordinates[d.hourRange]);
                 // console.log('xPos', hoursYCoordinates[d.hourRange]);
+            })
+            .on("mouseover", function(d, index) {
+                var offset = jqSvgElement.position().top;
+                
+                div.transition().duration(200).style("opacity", 1);
+                div.html('Canton: ' + d.canton + '<br/>' + 'sms envoyés: ' + d.smsCount)
+                    .style("left", (d.x + bodyDefaultMargin + radiusScale(d.smsCount)) + "px")
+                    .style("top", (d.y) + offset  + "px");
+               })
+            .on("mouseout", function(d) {
+                div.transition().duration(500).style("opacity", 0);
             });
             
 

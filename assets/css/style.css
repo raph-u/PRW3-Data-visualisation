@@ -134,3 +134,17 @@ h1 {
     position: relative;
     z-index: 2;
 }
+
+/*TOOLTIP*/
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    font: 12px sans-serif;
+    background: rgba(0, 0, 0, 0.7);
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 4;
+    color: #ffffff;
+}
