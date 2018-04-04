@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3.js pracc</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="assets/js/vendor/jquery.js"></script>
+    <script src="assets/js/vendor/lodash.js"></script>
+    <script src="assets/js/vendor/d3.js"></script>
+</head>
+<body>
+    <!-- <div id="playground">
+        <h1>Hello</h1>
+    </div> -->
+
+    <div id="controls">
+        <div id="dataTogglers">
+            <button id="smsButton" data-set="sms">SMS</button>
+            <button id="callsButton" data-set="calls">Appels</button>
+            <button id="downloadsButton" data-set="downloads">Téléchargements</button>
+        </div>
+
+        <div id="filters">
+            <button id="allButton">Tout</button>
+            <button id="daysButton">Jours de la semaine</button>
+            <button id="dayNightButton">Jour & nuit</button>
+            <button id="hoursButton">Heures</button>
+        </div>
+    </div>
+
+    <div id="headContainer">
+        <div id="full" class="headContent">
+            <h1>Tout</h1>
+        </div>
+
+        <div id="dayHalf" class="headContent">
+            <div class="dayHalfPeriod day">
+                <h2>Jour</h2>
+            </div>
+            <div class="dayHalfPeriod night">
+                <h2>Nuit</h2>
+            </div>
+        </div>
+
+        <div id="weekDays" class="headContent">
+            <div class="weekDay">
+                <h3>Lundi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Mardi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Mercredi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Jeudi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Vendredi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Samedi</h3>
+            </div>
+            <div class="weekDay">
+                <h3>Dimanche</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="chart">
+        <div id="hours">
+            <div class="hourRange">
+                <h3>12h - 15h</h3>
+            </div>
+            <div class="hourRange">
+                <h3>16h - 19h</h3>
+            </div>
+            <div class="hourRange">
+                <h3>20h - 23h</h3>
+            </div>
+            <div class="hourRange">
+                <h3>00h - 03h</h3>
+            </div>
+            <div class="hourRange">
+                <h3>04h - 07h</h3>
+            </div>
+            <div class="hourRange">
+                <h3>08h - 11h</h3>
+            </div>
+        </div>
+        <!-- D3 stuff goes here -->
+    </div>
+
+    <div id="cantons">
+        <div class="canton" data-canton="Argovie" data-cantonPrefix="AG">
+            <h4>AG</h4>
+            <svg>
+                <circle class="circle" r="5" fill="orange" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Appenzell" data-cantonPrefix="AI">
+            <h4>AI</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#24b7f7" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Appenzell" data-cantonPrefix="AR">
+            <h4>AR</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#39e657" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Berne" data-cantonPrefix="BE">
+            <h4>BE</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#d89768" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Bâle" data-cantonPrefix="BL">
+            <h4>BL</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#63d88b" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Bâle" data-cantonPrefix="BS">
+            <h4>BS</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#8a60c3" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Fribourg" data-cantonPrefix="FR">
+            <h4>FR</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#236fa4" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Genève" data-cantonPrefix="GE">
+            <h4>GE</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#cb3376" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Glaris" data-cantonPrefix="GL">
+            <h4>GL</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#554c85" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Grisons" data-cantonPrefix="GR">
+            <h4>GR</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#b2a65f" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Jura" data-cantonPrefix="JU">
+            <h4>JU</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#597217" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Liechtenstein" data-cantonPrefix="LI">
+            <h4>LI</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#4c7d89" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Lucerne" data-cantonPrefix="LU">
+            <h4>LU</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#46868f" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Neuchâtel" data-cantonPrefix="NE">
+            <h4>NE</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#db02c4" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Nidwald" data-cantonPrefix="NW">
+            <h4>NW</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#72863a" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Obwald" data-cantonPrefix="OW">
+            <h4>OW</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#9f2dd3" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Saint" data-cantonPrefix="SG">
+            <h4>SG</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#195c9d" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Schaffhouse" data-cantonPrefix="SH">
+            <h4>SH</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#6b887c" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Soleure" data-cantonPrefix="SO">
+            <h4>SO</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#1944b4" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Schwyz" data-cantonPrefix="SZ">
+            <h4>SZ</h4>
+            <svg>
+                <circle class="circle" r="5" fill="#a632ba" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Thurgovie" data-cantonPrefix="TG">
+            <h4>TG</h4>
+            <svg>
+                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Tessin" data-cantonPrefix="TI">
+            <h4>TI</h4>
+            <svg>
+                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Uri" data-cantonPrefix="UR">
+            <h4>UR</h4>
+            <svg>
+                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Vaud" data-cantonPrefix="VD">
+            <h4>VD</h4>
+            <svg>
+                <circle class="circle" r="5" fill="green" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Valais" data-cantonPrefix="VS">
+            <h4>VS</h4>
+            <svg>
+                <circle class="circle" r="5" fill="red" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Zoug" data-cantonPrefix="ZG">
+            <h4>ZG</h4>
+            <svg>
+                <circle class="circle" r="5" fill="blue" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        <div class="canton" data-canton="Zurich" data-cantonPrefix="ZH">
+            <h4>ZH</h4>
+            <svg>
+                <circle class="circle" r="5" fill="magenta" cx="5" cy="5"></circle>
+            </svg>
+        </div>
+        
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

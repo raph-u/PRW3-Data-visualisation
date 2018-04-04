@@ -1,0 +1,136 @@
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+/*h1 {
+    color: green;
+}
+*/
+
+/*#chart {
+    background-color: #ccc;
+}*/
+
+/*CONTROLS*/
+
+#filters button {
+    cursor: pointer;
+}
+
+#headContainer {
+    height: 50px;
+}
+
+.headContent {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+}
+
+h1 {
+    text-align: center;
+}
+
+
+/*DAY HALVES*/
+
+#dayHalf {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.dayHalfPeriod {
+    width: 40%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.dayHalfPeriod h2 {
+    text-align: center;
+}
+
+
+/*CANTONS*/
+
+#cantons {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:62%;
+    z-index: 3;
+}
+
+.canton {
+    height: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.canton:hover, .canton.active {
+    background-color: rgba(251, 202, 202, 0.61);
+}
+
+.canton svg {
+    width: 10px;
+    height: 10px;
+}
+
+.canton h4 {
+    text-align: center;
+    padding: 5px;
+}
+
+.canton svg {
+    margin-left: 5px;
+}
+
+
+/*WEEKDAYS*/
+
+#weekDays {
+    display: flex;
+    flex-direction: row;
+    visibility: hidden;
+}
+
+.weekDay {
+    width: 20%;
+}
+
+.weekDay h3 {
+    text-align: center;
+}
+
+
+/*HOURS*/
+
+#hours {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.hourRange {
+    width: 33%;
+    height: 275px;
+}
+
+.hourRange h3 {
+    text-align: center;
+}
+
+#chart svg {
+    position: relative;
+    z-index: 2;
+}
