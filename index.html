@@ -11,28 +11,240 @@
     <script src="assets/js/vendor/d3.js"></script>
 </head>
 <body>
-    <!-- <div id="playground">
-        <h1>Hello</h1>
-    </div> -->
+    <div id="heading">
+        <h1>Transit de données du réseau swisscom</h1>
+    </div>
+
+    <div id="description">
+        <p>Le but de cette visualisation est de démontrer l'usage du réseau Swisscom durant le mois de juillet 2017 en utilisant les données issues du <a href="https://opendata.swisscom.com/pages/home/">portail Open Data de Swisscom</a> . Ces données sont regroupées par canton mais incluent celles du Liechtenstein.</br>Elles démontrent le nombre de messages envoyés, appels passés et données téléchargés à différents moment de la journée et de la semaine.</p>
+    </div>
 
     <div id="controls">
-        <div id="dataTogglers">
-            <button id="smsButton" data-set="sms">SMS</button>
-            <button id="callsButton" data-set="calls">Appels</button>
-            <button id="downloadsButton" data-set="downloads">Téléchargements</button>
-        </div>
-
-        <div id="filters">
-            <button id="allButton">Tout</button>
-            <button id="daysButton">Jours de la semaine</button>
-            <button id="dayNightButton">Jour & nuit</button>
-            <button id="hoursButton">Heures</button>
+        <h3>Légende</h3>
+        <div id="cantons">
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Argovie" data-cantonPrefix="AG">
+                    <svg>
+                        <circle class="circle" r="10" fill="orange" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Argovie</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Appenzell" data-cantonPrefix="AI">
+                    <svg>
+                        <circle class="circle" r="10" fill="#24b7f7" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Appenzell</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Appenzell" data-cantonPrefix="AR">
+                    <svg>
+                        <circle class="circle" r="10" fill="#39e657" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Appenzell</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Berne" data-cantonPrefix="BE">
+                    <svg>
+                        <circle class="circle" r="10" fill="#d89768" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Berne</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Bâle" data-cantonPrefix="BL">
+                    <svg>
+                        <circle class="circle" r="10" fill="#63d88b" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Bâle</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Bâle" data-cantonPrefix="BS">
+                    <svg>
+                        <circle class="circle" r="10" fill="#8a60c3" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Bâle</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Fribourg" data-cantonPrefix="FR">
+                    <svg>
+                        <circle class="circle" r="10" fill="#236fa4" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Fribourg</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Genève" data-cantonPrefix="GE">
+                    <svg>
+                        <circle class="circle" r="10" fill="#cb3376" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Genève</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Glaris" data-cantonPrefix="GL">
+                    <svg>
+                        <circle class="circle" r="10" fill="#554c85" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Glaris</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Grisons" data-cantonPrefix="GR">
+                    <svg>
+                        <circle class="circle" r="10" fill="#b2a65f" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Grisons</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Jura" data-cantonPrefix="JU">
+                    <svg>
+                        <circle class="circle" r="10" fill="#597217" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Jura</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Liechtenstein" data-cantonPrefix="LI">
+                    <svg>
+                        <circle class="circle" r="10" fill="#4c7d89" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Liechtenstein</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Lucerne" data-cantonPrefix="LU">
+                    <svg>
+                        <circle class="circle" r="10" fill="#46868f" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Lucerne</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Neuchâtel" data-cantonPrefix="NE">
+                    <svg>
+                        <circle class="circle" r="10" fill="#db02c4" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Neuchâtel</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Nidwald" data-cantonPrefix="NW">
+                    <svg>
+                        <circle class="circle" r="10" fill="#72863a" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Nidwald</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Obwald" data-cantonPrefix="OW">
+                    <svg>
+                        <circle class="circle" r="10" fill="#9f2dd3" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Obwald</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Saint" data-cantonPrefix="SG">
+                    <svg>
+                        <circle class="circle" r="10" fill="#195c9d" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Saint</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Schaffhouse" data-cantonPrefix="SH">
+                    <svg>
+                        <circle class="circle" r="10" fill="#6b887c" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Schaffhouse</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Soleure" data-cantonPrefix="SO">
+                    <svg>
+                        <circle class="circle" r="10" fill="#1944b4" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Soleure</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Schwyz" data-cantonPrefix="SZ">
+                    <svg>
+                        <circle class="circle" r="10" fill="#a632ba" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Schwyz</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Thurgovie" data-cantonPrefix="TG">
+                    <svg>
+                        <circle class="circle" r="10" fill="" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Thurgovie</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Tessin" data-cantonPrefix="TI">
+                    <svg>
+                        <circle class="circle" r="10" fill="" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Tessin</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Uri" data-cantonPrefix="UR">
+                    <svg>
+                        <circle class="circle" r="10" fill="" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Uri</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Vaud" data-cantonPrefix="VD">
+                    <svg>
+                        <circle class="circle" r="10" fill="green" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Vaud</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Valais" data-cantonPrefix="VS">
+                    <svg>
+                        <circle class="circle" r="10" fill="red" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Valais</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Zoug" data-cantonPrefix="ZG">
+                    <svg>
+                        <circle class="circle" r="10" fill="blue" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Zoug</h4>
+                </div>
+            </div>
+            <div class="cantonHolder">
+                <div class="canton" data-canton="Zurich" data-cantonPrefix="ZH">
+                    <svg>
+                        <circle class="circle" r="10" fill="magenta" cx="10" cy="10"></circle>
+                    </svg>
+                    <h4>Zurich</h4>
+                </div>
+            </div>
+            <button id="resetCanton">reset</button>
         </div>
     </div>
 
     <div id="headContainer">
         <div id="full" class="headContent">
-            <h1>Tout</h1>
+            <h2>Tout</h2>
         </div>
 
         <div id="dayHalf" class="headContent">
@@ -93,172 +305,21 @@
         <!-- D3 stuff goes here -->
     </div>
 
-    <div id="cantons">
-        <div class="canton" data-canton="Argovie" data-cantonPrefix="AG">
-            <h4>AG</h4>
-            <svg>
-                <circle class="circle" r="5" fill="orange" cx="5" cy="5"></circle>
-            </svg>
+    <div id="togglers">
+        <div id="dataTogglers">
+            <button id="smsButton" data-set="sms">SMS</button>
+            <button id="callsButton" data-set="calls">Appels</button>
+            <button id="downloadsButton" data-set="downloads">Téléchargements</button>
         </div>
-        <div class="canton" data-canton="Appenzell" data-cantonPrefix="AI">
-            <h4>AI</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#24b7f7" cx="5" cy="5"></circle>
-            </svg>
+
+        <div id="timeFilters">
+            <button id="allButton">Tout</button>
+            <button id="daysButton">Jours de la semaine</button>
+            <button id="dayNightButton">Jour & nuit</button>
+            <button id="hoursButton">Heures</button>
         </div>
-        <div class="canton" data-canton="Appenzell" data-cantonPrefix="AR">
-            <h4>AR</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#39e657" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Berne" data-cantonPrefix="BE">
-            <h4>BE</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#d89768" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Bâle" data-cantonPrefix="BL">
-            <h4>BL</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#63d88b" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Bâle" data-cantonPrefix="BS">
-            <h4>BS</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#8a60c3" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Fribourg" data-cantonPrefix="FR">
-            <h4>FR</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#236fa4" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Genève" data-cantonPrefix="GE">
-            <h4>GE</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#cb3376" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Glaris" data-cantonPrefix="GL">
-            <h4>GL</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#554c85" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Grisons" data-cantonPrefix="GR">
-            <h4>GR</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#b2a65f" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Jura" data-cantonPrefix="JU">
-            <h4>JU</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#597217" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Liechtenstein" data-cantonPrefix="LI">
-            <h4>LI</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#4c7d89" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Lucerne" data-cantonPrefix="LU">
-            <h4>LU</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#46868f" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Neuchâtel" data-cantonPrefix="NE">
-            <h4>NE</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#db02c4" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Nidwald" data-cantonPrefix="NW">
-            <h4>NW</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#72863a" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Obwald" data-cantonPrefix="OW">
-            <h4>OW</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#9f2dd3" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Saint" data-cantonPrefix="SG">
-            <h4>SG</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#195c9d" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Schaffhouse" data-cantonPrefix="SH">
-            <h4>SH</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#6b887c" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Soleure" data-cantonPrefix="SO">
-            <h4>SO</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#1944b4" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Schwyz" data-cantonPrefix="SZ">
-            <h4>SZ</h4>
-            <svg>
-                <circle class="circle" r="5" fill="#a632ba" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Thurgovie" data-cantonPrefix="TG">
-            <h4>TG</h4>
-            <svg>
-                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Tessin" data-cantonPrefix="TI">
-            <h4>TI</h4>
-            <svg>
-                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Uri" data-cantonPrefix="UR">
-            <h4>UR</h4>
-            <svg>
-                <circle class="circle" r="5" fill="" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Vaud" data-cantonPrefix="VD">
-            <h4>VD</h4>
-            <svg>
-                <circle class="circle" r="5" fill="green" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Valais" data-cantonPrefix="VS">
-            <h4>VS</h4>
-            <svg>
-                <circle class="circle" r="5" fill="red" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Zoug" data-cantonPrefix="ZG">
-            <h4>ZG</h4>
-            <svg>
-                <circle class="circle" r="5" fill="blue" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <div class="canton" data-canton="Zurich" data-cantonPrefix="ZH">
-            <h4>ZH</h4>
-            <svg>
-                <circle class="circle" r="5" fill="magenta" cx="5" cy="5"></circle>
-            </svg>
-        </div>
-        <button id="resetCanton">reset</button>
     </div>
-    
+
     <script src="assets/js/main.js"></script>
 </body>
 </html>

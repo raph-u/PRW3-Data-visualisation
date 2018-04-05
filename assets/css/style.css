@@ -1,20 +1,35 @@
 * {
     font-family: 'Source Sans Pro', sans-serif;
+    color: #2C3F56;
 }
 
+#heading h1 {
+    font-size: 30pt;
+    text-align: center;
+    margin-top: 50px;
 
-/*h1 {
-    color: green;
 }
-*/
+
+#description {
+    width: 60%;
+    margin: 0 auto;
+}
 
 /*#chart {
     background-color: #ccc;
 }*/
 
 /*CONTROLS*/
+#controls h3 {
+    margin-left: 5px;
+}
 
-#filters button {
+#togglers {
+    position: relative;
+    z-index: 4;
+}
+
+#timeFilters button {
     cursor: pointer;
 }
 
@@ -28,7 +43,7 @@
     position: absolute;
 }
 
-h1 {
+h2 {
     text-align: center;
 }
 
@@ -60,17 +75,31 @@ h1 {
     position: relative;
     flex-direction: row;
     flex-wrap: wrap;
-    width:62%;
+    width:50%;
     z-index: 3;
 }
 
 .canton {
-    height: 20px;
-    padding: 10px;
+    padding: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+    border-radius: 3px;
+}
+
+.canton h4 {
+    margin: 0;
+}
+
+.cantonHolder {
+    min-width: 90px;
+    height: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
 }
 
 .canton:hover, .canton.active {
@@ -78,8 +107,8 @@ h1 {
 }
 
 .canton svg {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
 }
 
 .canton h4 {
@@ -87,9 +116,6 @@ h1 {
     padding: 5px;
 }
 
-.canton svg {
-    margin-left: 5px;
-}
 
 
 /*WEEKDAYS*/
@@ -145,6 +171,6 @@ div.tooltip {
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
-    z-index: 4;
+    z-index: 5;
     color: #ffffff;
 }
